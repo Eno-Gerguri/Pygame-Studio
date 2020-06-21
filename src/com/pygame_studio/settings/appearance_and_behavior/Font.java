@@ -112,7 +112,6 @@ public class Font {
 	 * @param fontDirectory - fontDirectory to set.
 	 */
 	public void setFontDirectory(String fontDirectory) {
-		// System.out.println(externalFonts);
 		if (externalFonts.containsKey(fontDirectory)) {
 			this.fontDirectory = externalFonts.get(fontDirectory);
 		} else if (localFonts.contains(fontDirectory)) {
@@ -176,7 +175,6 @@ public class Font {
 		Hashtable<String, String> externalFonts = new Hashtable<>();
 		
 		final File[] directoryFiles = externalFontDirectory.listFiles();
-		System.out.println(directoryFiles);
 		
 		if (directoryFiles != null) {
 			for (File file : directoryFiles) {
@@ -188,8 +186,6 @@ public class Font {
 				}
 			}
 		}
-		System.out.println(externalFonts);
-		
 		return externalFonts;
 	}
 
