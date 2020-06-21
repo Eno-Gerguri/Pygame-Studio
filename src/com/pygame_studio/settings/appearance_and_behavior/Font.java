@@ -38,6 +38,10 @@ public class Font {
 	 * @param fontSize - Stores the size of the given font in pixels.
 	 * @param fallbackFont - Stores the directory of the given fallback font if the main font fails or has been deleted or modified.
 	 */
+	public Font() {
+		super();
+	}
+	
 	public Font(File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont) {
         this.setExternalFontDirectory(externalFontDirectory);
 		
@@ -108,6 +112,7 @@ public class Font {
 	 * @param fontDirectory - fontDirectory to set.
 	 */
 	public void setFontDirectory(String fontDirectory) {
+		// System.out.println(externalFonts);
 		if (externalFonts.containsKey(fontDirectory)) {
 			this.fontDirectory = externalFonts.get(fontDirectory);
 		} else if (localFonts.contains(fontDirectory)) {
@@ -171,6 +176,7 @@ public class Font {
 		Hashtable<String, String> externalFonts = new Hashtable<>();
 		
 		final File[] directoryFiles = externalFontDirectory.listFiles();
+		System.out.println(directoryFiles);
 		
 		if (directoryFiles != null) {
 			for (File file : directoryFiles) {
@@ -182,6 +188,7 @@ public class Font {
 				}
 			}
 		}
+		System.out.println(externalFonts);
 		
 		return externalFonts;
 	}

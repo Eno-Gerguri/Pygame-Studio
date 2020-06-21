@@ -26,6 +26,10 @@ public class AppearanceAndBehavior {
 	 * @param fontSize - Stores the size of the given font in pixels.
 	 * @param fallbackFont - Stores the directory of the given fallback font if the main font fails or has been deleted or modified.
 	 */
+	public AppearanceAndBehavior() {
+		super();
+	}
+	
 	public AppearanceAndBehavior(File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont /*Parameters for the "Font" settings.*/) {
 		this.setFont(new Font(externalFontDirectory,
 				              fontName,

@@ -29,6 +29,10 @@ public class Settings {
 	 * @param fontSize - Stores the size of the given font in pixels.
 	 * @param fallbackFont - Stores the directory of the given fallback font if the main font fails or has been deleted or modified.
 	 */
+	public Settings() {
+		super();
+	}
+	
 	public Settings(File storedSettingsFile,
 					/*Appearance And Behavior settings*/
 					File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont /*"Font" settings*/) {
