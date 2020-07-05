@@ -4,6 +4,10 @@
 package com.pygame_studio.settings;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import com.pygame_studio.settings.appearance_and_behavior.AppearanceAndBehavior;
 
@@ -13,6 +17,8 @@ import com.pygame_studio.settings.appearance_and_behavior.AppearanceAndBehavior;
  */
 public class Settings {
 	private File storedSettingsFile;  // Where the settings .xml file is stored.
+	private File iconsDirectory;
+	private Map<String, String> icons = new HashMap<String, String>();
 	
 	private AppearanceAndBehavior appearanceAndBehavior;  // Stores all the settings to do with the appearance and behavior of Pygame Studio.
 
@@ -33,17 +39,22 @@ public class Settings {
 		super();
 	}
 	
-	public Settings(File storedSettingsFile,
+	public Settings(File storedSettingsFile, File iconsDirectory,
 					/*Appearance And Behavior settings*/
+					String lookAndFeel,
 					File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont /*"Font" settings*/) {
 		this.setStoredSettingsFile(storedSettingsFile);
+		this.setIconsDirectory(iconsDirectory);
+		this.setIcons();
 		
-		this.setAppearanceAndBehavior(new AppearanceAndBehavior(externalFontDirectory, fontName, fontStyle, fontSize, fallbackFont /*Arguments for the "Font" settings*/));
+		this.setAppearanceAndBehavior(new AppearanceAndBehavior(lookAndFeel, externalFontDirectory, fontName, fontStyle, fontSize, fallbackFont /*Arguments for the "Font" settings*/));
 	}
 	
-	public Settings(File storedSettingsFile,
+	public Settings(File storedSettingsFile, File iconsDirectory,
 					AppearanceAndBehavior appearanceAndBehavior) {
 		this.setStoredSettingsFile(storedSettingsFile);
+		this.setIconsDirectory(iconsDirectory);
+		this.setIcons();
 		
 		this.setAppearanceAndBehavior(appearanceAndBehavior);
 	}
@@ -60,6 +71,47 @@ public class Settings {
 	 */
 	public void setStoredSettingsFile(File storedSettingsFile) {
 		this.storedSettingsFile = storedSettingsFile;
+	}
+	
+	public File getIconsDirectory() {
+		return this.iconsDirectory;
+	}
+	
+	public void setIconsDirectory(File iconsDirectory) {
+		this.iconsDirectory = iconsDirectory;
+	}
+	
+	public Map<String, String> getIcons() {
+		return this.icons;
+	}
+	
+	public Map<String, String> getIcons(File iconsDirectory) {
+		Map<String, String> icons = new HashMap<String, String>();
+		
+		final File[] directoryFiles = iconsDirectory.listFiles();
+		
+		if (directoryFiles != null) {
+			for (File file : directoryFiles) {
+				if (file.isDirectory()) {  // If the file is a sub-directory.
+					icons.putAll(this.getIcons(file));  // Calls itself onto the directory.
+				} else {
+					for (String fileType : ImageIO.getReaderFileSuffixes()) {
+						fileType = '.' + fileType;
+						if (file.getName().contains(fileType)) {  // If it is an accepted icon type
+							String iconName = file.getName().replace(fileType, "");
+							icons.put(iconName, file.getPath());  // Puts the, name of the icon : ImageIcon of icon
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return icons;
+	}
+	
+	public void setIcons() {
+		this.icons = this.getIcons(this.iconsDirectory);
 	}
 
 	/**

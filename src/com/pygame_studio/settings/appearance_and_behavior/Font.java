@@ -7,8 +7,9 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Eno Gerguri
@@ -22,8 +23,8 @@ public class Font {
 	private int fontSize;  // Stores the given font size.
 	private String fallbackFont;  // Stores the directory of the given fallback font if the main font fails or has been deleted or modified.
 	
-	public static Hashtable<String, String> externalFonts;  // Stores all fonts in the externalFontsDirectory.
-	public static List<String> localFonts = new ArrayList<>();  // Stores all fonts that are available locally.
+	private Map<String, String> externalFonts = new HashMap<String, String>();  // Stores all fonts in the externalFontsDirectory.
+	private List<String> localFonts = new ArrayList<>();  // Stores all fonts that are available locally.
 	
 	/**
 	 * Declares how every setting to do with a font should be stored.
@@ -74,29 +75,29 @@ public class Font {
 	/**
 	 * @return externalFonts
 	 */
-	public Hashtable<String, String> getExternalFonts() {
-		return externalFonts;
+	public Map<String, String> getExternalFonts() {
+		return this.externalFonts;
 	}
 	
 	/**
 	 * Sets the external fonts to "externalFonts".
 	 */
 	public void setExternalFonts() {
-		externalFonts = getExternalFonts(this.externalFontDirectory);
+		this.externalFonts = this.getExternalFonts(this.externalFontDirectory);
 	}
 	
 	/**
 	 * @return localFonts
 	 */
 	public List<String> getLocalFonts() {
-		return localFonts;
+		return this.localFonts;
 	}
 	
 	/**
 	 * Adds the array of available fonts on the local device itself to the list.
 	 */
 	public void setLocalFonts() {
-		localFonts.addAll(Arrays.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
+		this.localFonts.addAll(Arrays.asList(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
 	}
 
 	/**
@@ -169,20 +170,20 @@ public class Font {
 	 * Recursively finds all of the fonts in the externalFontDirectory.
 	 * 
 	 * @param externalFontDirectory - Stores all of the external and customizable fonts the user can use.
-	 * @return Hashtable - A Hashtable filled with the name of the font as the key and the font's directory as the value.
+	 * @return Map - A Map filled with the name of the font as the key and the font's directory as the value.
 	 */
-	public static Hashtable<String, String> getExternalFonts(File externalFontDirectory) {
-		Hashtable<String, String> externalFonts = new Hashtable<>();
+	public Map<String, String> getExternalFonts(File externalFontDirectory) {
+		Map<String, String> externalFonts = new HashMap<String, String>();
 		
 		final File[] directoryFiles = externalFontDirectory.listFiles();
 		
 		if (directoryFiles != null) {
 			for (File file : directoryFiles) {
 				if (file.isDirectory()) {  // If the file is a sub-directory.
-					externalFonts.putAll(getExternalFonts(file));  // Calls itself onto the directory.
+					externalFonts.putAll(this.getExternalFonts(file));  // Calls itself onto the directory.
 				} else if (file.getName().contains(".ttf")) {  // If the file is a font.
 					String fontName = file.getName().replace(".ttf", "");  // Gets the name of the font.
-					externalFonts.put(fontName, file.getPath());  // Puts the, name of the font : font's directory, into the Hashtable.
+					externalFonts.put(fontName, file.getPath());  // Puts the, name of the font : font's directory, into the Map.
 				}
 			}
 		}

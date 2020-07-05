@@ -10,6 +10,8 @@ import java.io.File;
  *
  */
 public class AppearanceAndBehavior {
+	private String lookAndFeel;  // Stores the look and feel of the program.
+	
 	private Font font;  // Stores everything to do with the program's font.
 
 	/**
@@ -30,7 +32,10 @@ public class AppearanceAndBehavior {
 		super();
 	}
 	
-	public AppearanceAndBehavior(File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont /*Parameters for the "Font" settings.*/) {
+	public AppearanceAndBehavior(String lookAndFeel,
+								 File externalFontDirectory, String fontName, int fontStyle, int fontSize, String fallbackFont /*Parameters for the "Font" settings.*/) {
+		this.setLookAndFeel(lookAndFeel);
+		
 		this.setFont(new Font(externalFontDirectory,
 				              fontName,
 				              fontStyle,
@@ -39,10 +44,24 @@ public class AppearanceAndBehavior {
 	}
 	
 	/**
+	 * @return - lookAndFeel
+	 */
+	public String getLookAndFeel() {
+		return this.lookAndFeel;
+	}
+
+	/**
+	 * @param lookAndFeel - lookAndFeel to set
+	 */
+	public void setLookAndFeel(String lookAndFeel) {
+		this.lookAndFeel = lookAndFeel;
+	}
+	
+	/**
 	 * @return - font
 	 */
 	public Font getFont() {
-		return font;
+		return this.font;
 	}
 
 	/**

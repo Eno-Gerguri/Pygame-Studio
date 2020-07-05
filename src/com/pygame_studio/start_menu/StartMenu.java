@@ -3,67 +3,61 @@
  */
 package com.pygame_studio.start_menu;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.pygame_studio.settings.Settings;
-import com.pygame_studio.settings.SettingsManager;
+import com.pygame_studio.settings.XmlManager;
 import com.pygame_studio.settings.default_settings.DefaultSettings;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.ConfigureComboBox;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.CreateNewProjectButton;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.HelpComboBox;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.OpenProjectButton;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.PygameLogo;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.PygameStudioTitle;
+import com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components.PygameStudioVersion;
 
 /**
  * @author Eno Gerguri
  *
  */
 public class StartMenu {
-	private SettingsManager settingsManager = new SettingsManager();
-	private Settings defaultSettings = settingsManager.deserializeSettings(DefaultSettings.DEFAULT_SETTINGS_FILE_DIRECTORY);
+	private XmlManager xmlManager = new XmlManager();
+	private Settings settings = (Settings) xmlManager.deserializeObject(Settings.class, DefaultSettings.DEFAULT_SETTINGS_FILE_DIRECTORY);  // Gets the settings from the .xml "Settings" file
 	
 	private String windowTitle = "Welcome to Pygame Studio";
 	
-	private JFrame startMenu = new JFrame();
+	private StartMenuFrame startMenuFrame;
 
 	/**
-	 * 
+	 * Manages everything to do with the StartMenuFrame.
 	 */
 	public StartMenu() {
-		startMenu.setPreferredSize(new Dimension(300,300));
-		startMenu.setTitle("Hello Center");
-		startMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.initializeLookAndFeel();
+		this.startMenuFrame = new StartMenuFrame(this.settings);
 		
-		startMenu.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent event) {
-				titleAlignCenter(startMenu);
-			}
-		});
-		
-		startMenu.pack();
-		startMenu.setLocationRelativeTo(null);
-		startMenu.setVisible(true);
 	}
 	
-	private void titleAlignCenter(JFrame frame) {
-		Font titleFont = new Font(defaultSettings.getAppearanceAndBehavior().getFont().getFontDirectory(),
-								  defaultSettings.getAppearanceAndBehavior().getFont().getFontStyle(),
-								  defaultSettings.getAppearanceAndBehavior().getFont().getFontSize());
-		
-		String currentTitle = frame.getTitle().trim();
-		FontMetrics fontMetrics = frame.getFontMetrics(titleFont);
-		
-		int frameWidth = frame.getWidth();
-		int titleWidth = fontMetrics.stringWidth(currentTitle);
-		int spaceWidth = fontMetrics.stringWidth(" ");
-		int centerPos = (frameWidth / 2) - (titleWidth / 2);
-		int spaceCount = centerPos / spaceWidth;
-		
-		String spacePadding = "";
-		spacePadding = String.format("%" + (spaceCount - 14) + "s", spacePadding);
-		frame.setTitle(spacePadding + currentTitle);
+	/**
+	 * Sets the look and feel to be what is in the settings.
+	 */
+	private void initializeLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(this.settings.getAppearanceAndBehavior().getLookAndFeel());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
