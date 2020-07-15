@@ -31,7 +31,6 @@ public class HelpComboBox extends JComboBox<String> {
 	private final String HELP_TEXT = "Help";
 	private final String GITHUB_TEXT = "Github Page";
 	private final String DOCUMENTATION_TEXT = "Docs";
-	private final Color GRAY = new Color(110, 110, 110);
 	private Font defaultFont;
 	private final int FONT_SIZE = 16;
 	private final int GRIDX = 1;

@@ -3,7 +3,6 @@
  */
 package com.pygame_studio.start_menu.start_menu_panels.start_menu_panel_components;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,7 +23,6 @@ public class ConfigureComboBox extends JComboBox<String> {
 	 */
 	private static final long serialVersionUID = 7199339908722933942L;
 	private final String CONFIGURE_TEXT = "Configure";
-	private final Color GRAY = new Color(110, 110, 110);
 	private Font defaultFont;
 	private final int FONT_SIZE = 16;
 	private final int GRIDX = 1;
@@ -45,7 +43,7 @@ public class ConfigureComboBox extends JComboBox<String> {
 				settings.getAppearanceAndBehavior().getFont().getFontStyle(),
 				this.FONT_SIZE);
 		
-		// this.setForeground(this.GRAY);
+		// this.setForeground(settings.GRAY);
 		// this.setText(this.CONFIGURE_TEXT);
 		this.setFont(this.defaultFont);
 		

@@ -56,9 +56,14 @@ public class OpenProjectButton extends JButton {
 									this.FONT_SIZE);
 		
 		this.grayFolder = new ImageIcon(settings.getIcons().get("Gray-Folder"));
-		Image grayPlus = this.grayFolder.getImage();
-		Image scaledGrayPlus = grayPlus.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-		this.grayFolder = new ImageIcon(scaledGrayPlus);
+		Image grayFolder = this.grayFolder.getImage();
+		Image scaledGrayFolder = grayFolder.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+		this.grayFolder = new ImageIcon(scaledGrayFolder);
+		
+		this.blackFolder = new ImageIcon(settings.getIcons().get("Black-Folder"));
+		Image blackFolder = this.blackFolder.getImage();
+		Image scaledBlackFolder = blackFolder.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+		this.blackFolder = new ImageIcon(scaledBlackFolder);
 		
 		this.setForeground(this.GRAY);
 		this.setText(this.OPEN_PROJECT_TEXT);
