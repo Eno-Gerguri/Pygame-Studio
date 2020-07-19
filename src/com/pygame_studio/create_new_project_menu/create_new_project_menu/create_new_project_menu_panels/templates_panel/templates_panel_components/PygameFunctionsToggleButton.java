@@ -37,51 +37,43 @@ public class PygameFunctionsToggleButton extends JToggleButton {
 	private final int GRIDY = 1;
 	private final int GRIDWIDTH = 2;
 	private final int GRIDHEIGHT = 2;
-	private final Insets INSETS = new Insets(0, 0, 0, 0);
+	private final Insets INSETS = new Insets(0, 0, 0, 350);
 
 	public PygameFunctionsToggleButton(Settings settings, GridBagLayout gridBagLayout, GridBagConstraints gridBagConstraints) {
 		super();
 		
+		this.addMouseListener(new ClickHoldMouseListener(1000, (event) -> {
+			String pygameFunctionsInformationTitle = "Pygame Functions";
+			String pygameFunctionsDescription = "<html>\r\n" + 
+					"<html>Pygame Functions is an easy to use python library, which is perfect for beginners or people coming from scratch.<br/>\r\n" + 
+					"<html>Its simple human readable code is great for people looking to learn to code small games in python.<br/>\r\n" + 
+					"<html>It should be used for/by:\r\n" + 
+					"<html><ul>\r\n" + 
+					"<html><li>Simple and small games.</li>\r\n" + 
+					"<html><li>Beginners coming from scratch</li>\r\n" + 
+					"<html><li>People who want to make games using the python programming language in a simple readable way</li>\r\n" + 
+					"<html></ul>\r\n" + 
+					"<html>It should not be used by/for:\r\n" + 
+					"<html><ul>\r\n" + 
+					"<html><li>Large Projects</li>\r\n" + 
+					"<html><li>Projects which require fully customizable objects</li>\r\n" + 
+					"<html></ul>\r\n";
+			int pygameFunctionsMessageType = JOptionPane.INFORMATION_MESSAGE;
+			JOptionPane.showMessageDialog(null, pygameFunctionsDescription, pygameFunctionsInformationTitle, pygameFunctionsMessageType);
+		}));  // Adds a click hold listener, where if the user holds for more than the first argument the second argument occurs.
+		
 		this.addMouseListener(new MouseAdapter() {
-			private int holdTime = 2000;
-			private Consumer<MouseEvent> eventConsumer = (event) -> {
-				JOptionPane.showMessageDialog(null, "This is pygame functions.", "Pygame Functions", JOptionPane.INFORMATION_MESSAGE);
-			};
-			private Timer fireTimer;
-		    private MouseEvent lastEvent;
-		    {
-		    	this.fireTimer = new Timer(this.holdTime, event -> this.eventConsumer.accept(lastEvent));
-		        this.fireTimer.setRepeats(false);
-		    }
-		    
-	        public void mousePressed(MouseEvent e) {
-	            lastEvent = e;
-	            fireTimer.restart();
-	        }
-
-	        public void mouseReleased(MouseEvent e) {
-	            fireTimer.stop();
-	        }
-			
 			public void mouseEntered(MouseEvent event) {
 				PygameFunctionsToggleButton pygameFunctionsToggleButton = (PygameFunctionsToggleButton) event.getSource();
 				pygameFunctionsToggleButton.setIcon(pygameFunctionsToggleButton.blackPersonSolid);
 			}
 			
 			public void mouseClicked(MouseEvent event) {
-				int clickCount = event.getClickCount();
-				if (clickCount == 1) {
-					PygameFunctionsToggleButton pygameFunctionsToggleButton = (PygameFunctionsToggleButton) event.getSource();
-					if (pygameFunctionsToggleButton.isSelected()) {
-						pygameFunctionsToggleButton.setForeground(Color.BLACK);
-					} else {
-						pygameFunctionsToggleButton.setForeground(pygameFunctionsToggleButton.GRAY);
-					}
-					System.out.println("Pygame Functions Button Pressed.");
-				} else if (event.getClickCount() == 2) {
-					System.out.println("Double Clicked!");
+				PygameFunctionsToggleButton pygameFunctionsToggleButton = (PygameFunctionsToggleButton) event.getSource();
+				if (pygameFunctionsToggleButton.isSelected()) {
+					pygameFunctionsToggleButton.setForeground(Color.BLACK);
 				} else {
-					;
+					pygameFunctionsToggleButton.setForeground(pygameFunctionsToggleButton.GRAY);
 				}
 			}
 			

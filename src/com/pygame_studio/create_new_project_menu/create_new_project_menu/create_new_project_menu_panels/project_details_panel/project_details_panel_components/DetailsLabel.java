@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.templates_panel.templates_panel_components;
+package com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.project_details_panel.project_details_panel_components;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,13 +17,13 @@ import com.pygame_studio.settings.Settings;
  * @author Eno Gerguri
  *
  */
-public class TemplatesLabel extends JLabel {
+public class DetailsLabel extends JLabel {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6276314806023722301L;
-	private final String TEMPLATES_TEXT = "Templates (Press and hold a template for more information)";
+	private static final long serialVersionUID = -880029947517590976L;
+	private final String DETAILS_TEXT = "Details";
 	private final Color GRAY = new Color(110, 110, 110);
 	private Font defaultFont;
 	private final int FONT_SIZE = 16;
@@ -31,19 +31,19 @@ public class TemplatesLabel extends JLabel {
 	private final int GRIDY = 0;
 	private final int GRIDWIDTH = 1;
 	private final int GRIDHEIGHT = 1;
-	private final Insets INSETS = new Insets(0, 0, 25, 10);
+	private final Insets INSETS = new Insets(0, 25, 0, 0);
 
 	/**
 	 * 
 	 */
-	public TemplatesLabel(Settings settings, GridBagLayout gridBagLayout, GridBagConstraints gridBagConstraints) {
+	public DetailsLabel(Settings settings, GridBagLayout gridBagLayout, GridBagConstraints gridBagConstraints) {
 		super();
 		
 		this.defaultFont = new Font(settings.getAppearanceAndBehavior().getFont().getFontDirectory(),
 				settings.getAppearanceAndBehavior().getFont().getFontStyle(),
 				this.FONT_SIZE);
 		
-		this.setText(this.TEMPLATES_TEXT);
+		this.setText(this.DETAILS_TEXT);
 		this.setFont(this.defaultFont);
 		this.setForeground(this.GRAY);
 		
