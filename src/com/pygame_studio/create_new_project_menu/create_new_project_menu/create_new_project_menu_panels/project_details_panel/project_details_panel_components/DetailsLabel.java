@@ -31,7 +31,7 @@ public class DetailsLabel extends JLabel {
 	private final int GRIDY = 0;
 	private final int GRIDWIDTH = 1;
 	private final int GRIDHEIGHT = 1;
-	private final Insets INSETS = new Insets(0, 25, 0, 0);
+	private final Insets INSETS = new Insets(29, 25, 0, 0);
 
 	/**
 	 * 

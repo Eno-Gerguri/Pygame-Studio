@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -23,6 +22,10 @@ import com.pygame_studio.settings.Settings;
  */
 public class TemplatesPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3252048541637844727L;
 	private Settings settings;
 	private GridBagLayout gridBagLayout;
 	private GridBagConstraints gridBagConstraints;

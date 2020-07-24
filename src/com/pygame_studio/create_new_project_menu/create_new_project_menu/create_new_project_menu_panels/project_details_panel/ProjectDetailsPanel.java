@@ -21,6 +21,10 @@ import com.pygame_studio.settings.Settings;
  */
 public class ProjectDetailsPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3021948179589920068L;
 	private Settings settings;
 	private GridBagLayout gridBagLayout;
 	private GridBagConstraints gridBagConstraints;

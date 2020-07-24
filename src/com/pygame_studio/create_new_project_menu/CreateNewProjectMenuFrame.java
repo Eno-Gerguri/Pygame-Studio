@@ -6,16 +6,14 @@ package com.pygame_studio.create_new_project_menu;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.project_confirmation_panel.ProjectConfirmationPanel;
 import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.project_details_panel.ProjectDetailsPanel;
 import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.templates_panel.TemplatesPanel;
 import com.pygame_studio.settings.Settings;
@@ -64,8 +62,9 @@ public class CreateNewProjectMenuFrame extends JFrame {
 		this.containerPanel.setLayout(new GridBagLayout());
 		this.containerPanel.setBackground(Color.WHITE);
 		
-		this.containerPanel.add(new TemplatesPanel(settings, this.gridBagLayout, this.gridBagConstraints));
-		this.containerPanel.add(new ProjectDetailsPanel(settings, this.gridBagLayout, this.gridBagConstraints));
+		this.containerPanel.add(new TemplatesPanel(settings, this.gridBagLayout, this.gridBagConstraints), this.gridBagConstraints);
+		this.containerPanel.add(new ProjectDetailsPanel(settings, this.gridBagLayout, this.gridBagConstraints), this.gridBagConstraints);
+		this.containerPanel.add(new ProjectConfirmationPanel(settings, this.gridBagLayout, this.gridBagConstraints), this.gridBagConstraints);
 		
 		this.add(this.containerPanel);
 		
