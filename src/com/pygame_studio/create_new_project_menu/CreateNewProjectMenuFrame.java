@@ -13,9 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.project_confirmation_panel.ProjectConfirmationPanel;
-import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.project_details_panel.ProjectDetailsPanel;
-import com.pygame_studio.create_new_project_menu.create_new_project_menu.create_new_project_menu_panels.templates_panel.TemplatesPanel;
 import com.pygame_studio.settings.Settings;
 
 /**

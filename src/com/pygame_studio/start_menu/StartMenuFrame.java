@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.pygame_studio.settings.Settings;
-import com.pygame_studio.start_menu.start_menu_panels.StartMenuPanel;
 
 /**
  * @author Eno Gerguri
